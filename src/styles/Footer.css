@@ -1,0 +1,250 @@
+/* Footer Styles - Green Theme */
+.sf-footer {
+  background-color: #0a3622; /* พื้นหลังสีเขียวเข้ม */
+  color: #f8fafc;
+  padding: 64px 0 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.sf-footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Footer Top Section */
+.sf-footer-top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+
+@media (min-width: 768px) {
+  .sf-footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sf-footer-top {
+    grid-template-columns: 2fr 3fr 2fr;
+    gap: 64px;
+  }
+}
+
+/* Brand & Logo */
+.sf-footer-brand {
+  margin-bottom: 32px;
+}
+
+.sf-footer-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #f8fafc;
+  margin-bottom: 16px;
+}
+
+.sf-footer-logo img {
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+}
+
+.sf-footer-logo span {
+  font-size: 24px;
+  font-weight: 700;
+  color: #4ade80; /* สีโลโก้เป็นเขียวสว่าง */
+}
+
+.sf-footer-tagline {
+  color: #a7f3d0; /* ข้อความสีเขียวอ่อน */
+  margin-bottom: 24px;
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+/* Social Links */
+.sf-social-links {
+  display: flex;
+  gap: 16px;
+}
+
+.sf-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.sf-social-link:hover {
+  background-color: #10b981; /* เปลี่ยนเป็นสีเขียวเมื่อ hover */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.2);
+}
+
+/* Footer Links */
+.sf-footer-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 1024px) {
+  .sf-footer-links {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.sf-footer-heading {
+  color: #f8fafc;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.sf-footer-heading::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 2px;
+  background-color: #10b981; /* เส้นใต้หัวข้อเป็นสีเขียว */
+}
+
+.sf-footer-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sf-footer-menu li {
+  margin-bottom: 12px;
+}
+
+.sf-footer-link {
+  color: #d1fae5; /* ลิงก์สีเขียวอ่อน */
+  text-decoration: none;
+  transition: color 0.2s;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.sf-footer-link:hover {
+  color: #4ade80; /* เปลี่ยนเป็นสีเขียวสดเมื่อ hover */
+  text-decoration: underline;
+}
+
+/* Contact Info */
+.sf-contact-info {
+  margin-bottom: 24px;
+}
+
+.sf-contact-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  color: #d1fae5; /* ข้อความสีเขียวอ่อน */
+  font-size: 14px;
+}
+
+.sf-contact-item svg {
+  margin-right: 12px;
+  min-width: 18px;
+  color: #4ade80; /* ไอคอนสีเขียวสด */
+}
+
+/* Newsletter */
+.sf-newsletter-heading {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #f8fafc;
+}
+
+.sf-newsletter-form {
+  display: flex;
+}
+
+.sf-newsletter-input {
+  flex: 1;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 4px 0 0 4px;
+  font-size: 14px;
+  background-color: #0f5132; /* พื้นหลัง input สีเขียวเข้ม */
+  color: #f8fafc;
+}
+
+.sf-newsletter-input:focus {
+  outline: none;
+  background-color: #134e4a; /* พื้นหลังเมื่อ focus สีเขียวเข้มกว่า */
+}
+
+.sf-newsletter-button {
+  padding: 10px 16px;
+  background-color: #10b981; /* ปุ่มสีเขียว */
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.sf-newsletter-button:hover {
+  background-color: #059669; /* ปุ่มสีเขียวเข้มขึ้นเมื่อ hover */
+}
+
+/* Footer Bottom */
+.sf-footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 768px) {
+  .sf-footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.sf-footer-copyright {
+  color: #a7f3d0; /* ข้อความลิขสิทธิ์สีเขียวอ่อน */
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+  .sf-footer-copyright {
+    margin-bottom: 0;
+  }
+}
+
+.sf-language-select {
+  padding: 8px 12px;
+  background-color: #0f5132; /* พื้นหลัง select สีเขียวเข้ม */
+  border: none;
+  border-radius: 4px;
+  color: #d1fae5; /* ข้อความสีเขียวอ่อน */
+  font-size: 14px;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d1fae5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  padding-right: 32px;
+}

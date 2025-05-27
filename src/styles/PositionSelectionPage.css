@@ -1,0 +1,471 @@
+/* src/styles/SoccerField.css */
+.soccer-field-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem auto;
+}
+
+.soccer-field {
+  width: 300px;
+  height: 450px;
+  background-color: #1a7d1a;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  border: none; /* ลบขอบสีขาว */
+}
+
+.position-circle {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border: 1px solid #333; /* ลดความหนาขอบ */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.position-circle:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.position-circle.selected {
+  background-color: #ffeb3b;
+  border-color: #ff9800;
+}
+
+.position-circle.unavailable {
+  background-color: #f44336;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.position-instruction {
+  text-align: center;
+  margin-top: 15px;
+  color: #555;
+  font-size: 14px;
+}
+
+/* Field marking lines */
+.field-line {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.center-line {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+.vertical-line {
+  top: 0;
+  left: 50%;
+  width: 1px;
+  height: 100%;
+  transform: translateX(-50%);
+}
+
+/* Center circle */
+.center-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Goal areas */
+.goal-area-top {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 120px;
+  height: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-top: none;
+  transform: translateX(-50%);
+}
+
+.goal-area-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 120px;
+  height: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-bottom: none;
+  transform: translateX(-50%);
+}
+
+/* Penalty areas */
+.penalty-area-top {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 180px;
+  height: 80px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-top: none;
+  transform: translateX(-50%);
+}
+
+.penalty-area-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 180px;
+  height: 80px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-bottom: none;
+  transform: translateX(-50%);
+}
+
+/* Corner arcs */
+.corner-arc {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+}
+
+.corner-top-left {
+  top: 0;
+  left: 0;
+  border-top: none;
+  border-left: none;
+}
+
+.corner-top-right {
+  top: 0;
+  right: 0;
+  border-top: none;
+  border-right: none;
+}
+
+.corner-bottom-left {
+  bottom: 0;
+  left: 0;
+  border-bottom: none;
+  border-left: none;
+}
+
+.corner-bottom-right {
+  bottom: 0;
+  right: 0;
+  border-bottom: none;
+  border-right: none;
+}
+
+/* เพิ่มเส้นขอบแบบคม */
+.field-outline {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+  pointer-events: none;
+}
+.position-circle {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  background-color: #3d8b40;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.position-circle:hover {
+  background-color: #3d8b40;
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.position-circle.selected {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  border-color: #FFD700;
+  animation: pulse 1.5s infinite;
+}
+
+.position-circle.unavailable {
+  background: #666;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.position-circle:disabled {
+  cursor: not-allowed;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+  }
+}
+
+/* ส่วนแสดงข้อมูลตำแหน่ง */
+.position-info {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
+}
+
+.selected-position-info {
+  background: linear-gradient(135deg, #01b531 0%, #01b531 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.selected-position-info h3 {
+  margin: 0 0 10px 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.selected-position-info p {
+  margin: 0;
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* ส่วนค้นหาทีม */
+.searching-teams {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.searching-teams p {
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  margin: 0;
+}
+
+/* รายการทีม */
+.teams-list {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.teams-list h4 {
+  color: #333;
+  font-size: 22px;
+  margin: 0 0 20px 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.team-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.team-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #FF6B35, #F7931E, #4CAF50, #2196F3);
+}
+
+.team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+  border-color: #4CAF50;
+}
+
+.team-card h5 {
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 15px 0;
+  padding-top: 5px;
+}
+
+.team-card p {
+  color: #666;
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.team-card p strong {
+  color: #333;
+  font-weight: 600;
+}
+
+.join-team-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.join-team-btn:hover {
+  background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.join-team-btn:active {
+  transform: translateY(0);
+}
+
+/* ข้อความเมื่อไม่พบทีม */
+.no-teams {
+  background: linear-gradient(135deg, #ff7b7b 0%, #ff6b6b 100%);
+  color: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+}
+
+.no-teams p {
+  margin: 10px 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.no-teams p:first-child {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .soccer-field-container {
+    padding: 10px;
+  }
+  
+  .soccer-field {
+    width: 300px;
+    height: 450px;
+  }
+  
+  .position-circle {
+    width: 40px;
+    height: 40px;
+    font-size: 10px;
+  }
+  
+  .teams-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .selected-position-info h3 {
+    font-size: 20px;
+  }
+  
+  .selected-position-info p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .soccer-field {
+    width: 280px;
+    height: 420px;
+  }
+  
+  .position-circle {
+    width: 35px;
+    height: 35px;
+    font-size: 9px;
+  }
+  
+  .team-card {
+    padding: 15px;
+  }
+  
+  .teams-list {
+    padding: 15px;
+  }
+}

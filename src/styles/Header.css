@@ -1,0 +1,939 @@
+/* Header Styles - Green Theme */
+.sf-header {
+  background-color: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.sf-header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.sf-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+}
+
+/* Logo Styles */
+.sf-logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.sf-logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #0a3622; /* สีเขียวเข้ม */
+  font-weight: bold;
+}
+
+.sf-logo-text {
+  font-size: 22px;
+  font-weight: 700;
+  color: #15803d; /* สีเขียวเข้มปานกลาง */
+}
+
+/* Desktop Navigation */
+.sf-desktop-nav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .sf-desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+.sf-nav-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #166534; /* สีเขียวเข้ม */
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.sf-nav-item:hover {
+  background-color: #f0fdf4; /* พื้นหลังสีเขียวอ่อนมากเมื่อ hover */
+  color: #15803d; /* สีเขียวเข้มขึ้นเมื่อ hover */
+}
+
+.sf-nav-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+  color: #16a34a; /* สีเขียวสำหรับไอคอน */
+}
+
+/* Notification Styles */
+.sf-notification-container {
+  position: relative;
+}
+
+.sf-notification-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.sf-notification-button:hover {
+  background-color: #f0fdf4; /* พื้นหลังสีเขียวอ่อนมากเมื่อ hover */
+}
+
+.sf-notification-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  background-color: #dc2626; /* สีแดงสำหรับการแจ้งเตือน */
+  color: white;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Login Button */
+.sf-login-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #16a34a; /* สีเขียวสด */
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.sf-login-button:hover {
+  background-color: #15803d; /* สีเขียวเข้มขึ้นเมื่อ hover */
+}
+
+/* Mobile Menu Button */
+.sf-mobile-menu-button {
+  display: block;
+}
+
+.sf-mobile-menu-button button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.sf-mobile-menu-button button:hover {
+  background-color: #f0fdf4; /* พื้นหลังสีเขียวอ่อนมากเมื่อ hover */
+}
+
+.sf-menu-icon {
+  width: 24px;
+  height: 24px;
+  color: #16a34a; /* สีเขียวสำหรับไอคอนเมนู */
+}
+
+@media (min-width: 768px) {
+  .sf-mobile-menu-button {
+    display: none;
+  }
+}
+
+/* Mobile Menu */
+.sf-mobile-menu {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0 16px;
+  border-top: 1px solid #dcfce7; /* เส้นขอบสีเขียวอ่อน */
+}
+
+.sf-mobile-menu-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: #166534; /* สีเขียวเข้ม */
+  position: relative;
+}
+
+.sf-mobile-menu-item.sf-mobile-menu-item-active {
+  background-color: #f0fdf4; /* พื้นหลังสีเขียวอ่อนมากสำหรับ active */
+  color: #15803d; /* สีเขียวเข้มขึ้นสำหรับ active */
+  font-weight: 500;
+}
+
+.sf-mobile-menu-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  color: #16a34a; /* สีเขียวสำหรับไอคอนในเมนูมือถือ */
+}
+
+.sf-mobile-notification-badge {
+  margin-left: auto;
+  width: 20px;
+  height: 20px;
+  background-color: #dc2626; /* สีแดงสำหรับการแจ้งเตือน */
+  color: white;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sf-mobile-login-button {
+  margin-top: 8px;
+  padding: 12px 16px;
+  background-color: #16a34a; /* สีเขียวสด */
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+.sf-mobile-login-button:hover {
+  background-color: #15803d; /* สีเขียวเข้มขึ้นเมื่อ hover */
+}
+
+@media (min-width: 768px) {
+  .sf-mobile-menu {
+    display: none;
+  }
+}
+/* เพิ่ม CSS นี้ลงใน Header.css ของคุณ */
+
+/* Notification Container Styles */
+.sf-notification-container {
+  position: relative;
+}
+
+.sf-notification-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.sf-notification-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sf-notification-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background-color: #ef4444;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+/* Notification Popup Styles */
+.sf-notification-popup {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 380px;
+  max-width: 90vw;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  margin-top: 8px;
+  overflow: hidden;
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sf-notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f3f4f6;
+  background-color: #fafafa;
+}
+
+.sf-notification-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.sf-mark-all-read {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: #3b82f6;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.sf-mark-all-read:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* Notification List */
+.sf-notification-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.sf-notification-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f3f4f6;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.sf-notification-item:hover {
+  background-color: #f9fafb;
+}
+
+.sf-notification-item:last-child {
+  border-bottom: none;
+}
+
+.sf-notification-unread {
+  background-color: #f0f9ff;
+  border-left: 4px solid #3b82f6;
+}
+
+.sf-notification-content {
+  display: flex;
+  gap: 12px;
+  flex: 1;
+}
+
+.sf-notification-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.sf-notification-text {
+  flex: 1;
+}
+
+.sf-notification-item-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 4px 0;
+  line-height: 1.4;
+}
+
+.sf-notification-message {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.sf-notification-time {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* Notification Actions */
+.sf-notification-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.sf-mark-read-btn,
+.sf-remove-notification {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  color: #6b7280;
+}
+
+.sf-mark-read-btn:hover {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+}
+
+.sf-remove-notification:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+/* No Notifications */
+.sf-no-notifications {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+}
+
+.sf-no-notifications p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Notification Footer */
+.sf-notification-footer {
+  padding: 12px 20px;
+  border-top: 1px solid #f3f4f6;
+  background-color: #fafafa;
+  text-align: center;
+}
+
+.sf-view-all-notifications {
+  color: #3b82f6;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.sf-view-all-notifications:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .sf-notification-popup {
+    width: 320px;
+    right: -20px;
+  }
+  
+  .sf-notification-header,
+  .sf-notification-item,
+  .sf-notification-footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sf-notification-popup {
+    width: 300px;
+    right: -40px;
+  }
+}
+.sf-mark-all-read {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: #3b82f6;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.sf-mark-all-read:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* เพิ่ม CSS นี้ลงใน Header.css ของคุณ */
+
+/* Notification Container Styles */
+.sf-notification-container {
+  position: relative;
+}
+
+/* Profile Container Styles */
+.sf-profile-container {
+  position: relative;
+}
+
+.sf-profile-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+  max-width: 200px;
+}
+
+.sf-profile-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sf-profile-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+}
+
+.sf-profile-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}
+
+.sf-profile-chevron {
+  transition: transform 0.2s ease;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.sf-profile-chevron-open {
+  transform: rotate(180deg);
+}
+
+/* Profile Dropdown */
+.sf-profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 280px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  margin-top: 8px;
+  overflow: hidden;
+  animation: slideIn 0.2s ease-out;
+}
+
+.sf-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.sf-profile-dropdown-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e5e7eb;
+}
+
+.sf-profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.sf-profile-dropdown-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sf-profile-dropdown-email {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Profile Menu */
+.sf-profile-menu {
+  padding: 8px 0;
+}
+
+.sf-profile-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  color: #374151;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.sf-profile-menu-item:hover {
+  background-color: #f3f4f6;
+}
+
+.sf-logout-item {
+  color: #dc2626;
+}
+
+.sf-logout-item:hover {
+  background-color: #fef2f2;
+}
+
+.sf-profile-divider {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 8px 0;
+}
+
+.sf-notification-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.sf-notification-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sf-notification-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background-color: #ef4444;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+/* Notification Popup Styles */
+.sf-notification-popup {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 380px;
+  max-width: 90vw;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  margin-top: 8px;
+  overflow: hidden;
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sf-notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f3f4f6;
+  background-color: #fafafa;
+}
+
+.sf-notification-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.sf-mark-all-read {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: #3b82f6;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.sf-mark-all-read:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* Notification List */
+.sf-notification-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.sf-notification-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f3f4f6;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.sf-notification-item:hover {
+  background-color: #f9fafb;
+}
+
+.sf-notification-item:last-child {
+  border-bottom: none;
+}
+
+.sf-notification-unread {
+  background-color: #f0f9ff;
+  border-left: 4px solid #3b82f6;
+}
+
+.sf-notification-content {
+  display: flex;
+  gap: 12px;
+  flex: 1;
+}
+
+.sf-notification-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.sf-notification-text {
+  flex: 1;
+}
+
+.sf-notification-item-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 4px 0;
+  line-height: 1.4;
+}
+
+.sf-notification-message {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.sf-notification-time {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* Notification Actions */
+.sf-notification-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.sf-mark-read-btn,
+.sf-remove-notification {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  color: #6b7280;
+}
+
+.sf-mark-read-btn:hover {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+}
+
+.sf-remove-notification:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+/* No Notifications */
+.sf-no-notifications {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+}
+
+.sf-no-notifications p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Notification Footer */
+.sf-notification-footer {
+  padding: 12px 20px;
+  border-top: 1px solid #f3f4f6;
+  background-color: #fafafa;
+  text-align: center;
+}
+
+.sf-view-all-notifications {
+  color: #3b82f6;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.sf-view-all-notifications:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .sf-notification-popup {
+    width: 320px;
+    right: -20px;
+  }
+  
+  .sf-notification-header,
+  .sf-notification-item,
+  .sf-notification-footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .sf-profile-dropdown {
+    width: 260px;
+    right: -20px;
+  }
+
+  .sf-profile-name {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .sf-notification-popup {
+    width: 300px;
+    right: -40px;
+  }
+
+  .sf-profile-dropdown {
+    width: 250px;
+    right: -40px;
+  }
+}
