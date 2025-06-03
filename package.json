@@ -16,6 +16,7 @@
     "react-router-dom": "^7.6.1"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.8",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.24",
