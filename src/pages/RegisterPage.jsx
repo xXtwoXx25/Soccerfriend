@@ -20,10 +20,18 @@ const RegisterPage = () => {
     }
 
     try {
+      const [firstName, ...rest] = form.fullName.trim().split(" ");
+      const lastName = rest.join(" ") || "-";
+
       const payload = {
-        name: form.fullName,
+        firstName,
+        lastName,
         email: form.email,
+        phone: form.phone,
         password: form.password,
+        confirmPassword: form.confirmPassword,
+        position: form.position,
+        location: form.location,
       };
 
       const res = await fetch("http://localhost:8080/api/auth/register", {

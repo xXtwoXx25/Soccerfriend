@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/AuthContext"; // ✅ อย่าลืมเปลี่ยน path ให้ตรงโปรเจกต์คุณ
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const { setToken, setUserData } = useAuth(); // ✅ ใช้ context เพื่ออัปเดตสถานะหลัง login
+
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
 
@@ -24,15 +27,20 @@ const LoginForm = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.message || "เข้าสู่ระบบไม่สำเร็จ");
+        setError(data.error || "เข้าสู่ระบบไม่สำเร็จ");
         return;
       }
 
+      // ✅ บันทึก token & user ทั้งใน Context และ LocalStorage
+      setToken(data.token);
+      setUserData(data.user);
       localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
       navigate("/");
     } catch (err) {
-      console.error(err);
-      setError("เกิดข้อผิดพลาด");
+      console.error("Login error:", err);
+      setError("เกิดข้อผิดพลาดในการเข้าสู่ระบบ");
     }
   };
 
@@ -66,16 +74,21 @@ const LoginForm = () => {
 
       <div className="flex justify-between items-center text-sm">
         <label className="flex items-center space-x-2">
-          <input type="checkbox" className="rounded border-gray-300 text-green-600 focus:ring-green-500" />
+          <input
+            type="checkbox"
+            className="rounded border-gray-300 text-green-600 focus:ring-green-500"
+          />
           <span className="text-gray-600">จดจำฉัน</span>
         </label>
-        <Link to="#" className="text-blue-600 hover:text-blue-800">ลืมรหัสผ่าน?</Link>
+        <Link to="#" className="text-blue-600 hover:text-blue-800">
+          ลืมรหัสผ่าน?
+        </Link>
       </div>
 
       {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
-      <button 
-        type="submit" 
+      <button
+        type="submit"
         className="w-full bg-green-600 text-white py-2 px-4 rounded-md font-semibold hover:bg-green-700 transition-colors duration-200"
       >
         เข้าสู่ระบบ
