@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import "../styles/TeamSettings.css";
+import TeamHeader from '../components/TeamSettings/TeamHeader';
+import TeamCount from '../components/TeamSettings/TeamCount';
+import TeamField from '../components/TeamSettings/TeamField';
+import TeamMembersList from '../components/TeamSettings/TeamMemberList';
+import InviteInput from '../components/TeamSettings/InviteInput';
 
 const TeamSettings = () => {
   const [members, setMembers] = useState([]);
@@ -13,44 +17,20 @@ const TeamSettings = () => {
   };
 
   return (
-    <div className="team-settings-container">
-      <div className="team-header">
-        <h1>หน้าทีม setting</h1>
-        <button className="invite-btn" onClick={handleInvite}>เชิญ</button>
-      </div>
-
-      <div className="team-body">
-        <div className="team-count">
-          <p>จำนวนคน</p>
-          <div className="count-box">{members.length}/8</div>
+    <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <TeamHeader onInvite={handleInvite} />
+        <div className="flex flex-col md:flex-row gap-6 mt-6">
+          <TeamCount count={members.length} max={8} />
+          <TeamField />
+          <TeamMembersList members={members} />
         </div>
-
-        <div className="team-field">
-          <p>สนามฟุตบอล 7 คน</p>
-          <div className="circle-positions">
-            {[...Array(7)].map((_, index) => (
-              <div key={index} className="circle"></div>
-            ))}
-          </div>
+        <div className="mt-6">
+          <InviteInput
+            value={inviteEmail}
+            onChange={(e) => setInviteEmail(e.target.value)}
+          />
         </div>
-
-        <div className="team-members">
-          <p>รายชื่อผู้เล่น</p>
-          <ul>
-            {members.map((m, i) => (
-              <li key={i}>{m.name} - รอการยืนยัน</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div className="team-footer">
-        <input
-          type="text"
-          placeholder="กรอกอีเมล"
-          value={inviteEmail}
-          onChange={(e) => setInviteEmail(e.target.value)}
-        />
       </div>
     </div>
   );

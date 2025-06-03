@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Edit, User } from "lucide-react";
 import axios from "axios";
-import '../styles/ProfilePage.css';
+import ProfileHeader from "../components/Profile/ProfileHeader";
+import ProfileForm from "../components/Profile/ProfileForm";
+import showToast from "../components/Profile/Toast";
 
 const ProfilePage = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -15,7 +16,7 @@ const ProfilePage = () => {
 
   const fetchProfile = async () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       if (!token) throw new Error("Token not found. Please login again.");
 
       const res = await axios.get("http://localhost:8080/api/profile/me", {
@@ -35,22 +36,13 @@ const ProfilePage = () => {
 
   const handleSave = async () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       await axios.put("http://localhost:8080/api/profile/me", profile, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       setIsEditing(false);
-      const toastContainer = document.createElement("div");
-      toastContainer.className = "profile-toast";
-      toastContainer.innerHTML = `
-        <div class="profile-toast-content">
-          <h4>บันทึกข้อมูลสำเร็จ</h4>
-          <p>โปรไฟล์ของคุณได้รับการอัพเดทแล้ว</p>
-        </div>
-      `;
-      document.body.appendChild(toastContainer);
-      setTimeout(() => toastContainer.remove(), 3000);
+      showToast("บันทึกข้อมูลสำเร็จ", "โปรไฟล์ของคุณได้รับการอัพเดทแล้ว");
     } catch (err) {
       console.error(err);
       alert("Failed to save profile.");
@@ -80,142 +72,42 @@ const ProfilePage = () => {
     }
   };
 
-  const calculateAge = (birthDate) => {
-    const today = new Date();
-    const birth = new Date(birthDate);
-    let age = today.getFullYear() - birth.getFullYear();
-    const monthDiff = today.getMonth() - birth.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) age--;
-    return age;
-  };
-
-  if (loading) return <div className="profile-loading">Loading...</div>;
-  if (error) return <div className="profile-error">{error}</div>;
-  if (!profile) return <div className="profile-error">Profile not found.</div>;
+  if (loading) return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
+  if (error) return <div className="flex items-center justify-center min-h-screen text-red-500">{error}</div>;
+  if (!profile) return <div className="flex items-center justify-center min-h-screen text-red-500">Profile not found.</div>;
 
   return (
-    <div className="profile-container">
-      <div className="profile-card">
-        <div className="profile-header">
-          <div className="profile-title-row">
-            <h2 className="profile-title">โปรไฟล์ของฉัน</h2>
-            <button className="profile-edit-button" onClick={() => setIsEditing(!isEditing)}>
-              <Edit className="profile-edit-icon" />
+    <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+        <ProfileHeader
+          profile={profile}
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+          handleAvatarUpload={handleAvatarUpload}
+        />
+
+        <ProfileForm
+          profile={profile}
+          setProfile={setProfile}
+          isEditing={isEditing}
+        />
+
+        {isEditing && (
+          <div className="flex justify-end gap-4 p-6 border-t border-gray-200">
+            <button 
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              onClick={() => setIsEditing(false)}
+            >
+              ยกเลิก
+            </button>
+            <button 
+              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              onClick={handleSave}
+            >
+              บันทึก
             </button>
           </div>
-          <div className="profile-avatar-container">
-            <div className="profile-avatar">
-              {profile.avatarUrl ? (
-                <img
-                  src={profile.avatarUrl}
-                  alt={profile.name}
-                  className="profile-avatar-image"
-                  style={{ borderRadius: "50%", objectFit: "cover" }}
-                />
-              ) : (
-                <div className="profile-avatar-fallback">
-                  <User className="profile-avatar-placeholder" />
-                </div>
-              )}
-            </div>
-            {isEditing && (
-              <label className="profile-change-avatar-button">
-                เปลี่ยนรูปโปรไฟล์
-                <input
-                  type="file"
-                  accept="image/*"
-                  style={{ display: "none" }}
-                  onChange={handleAvatarUpload}
-                />
-              </label>
-            )}
-          </div>
-        </div>
-
-        <div className="profile-content">
-          <div className="profile-form">
-            <div className="profile-form-group">
-              <label className="profile-label">ชื่อผู้เล่น</label>
-              <input
-                className="profile-input"
-                value={profile.name || ""}
-                onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                disabled={!isEditing}
-              />
-            </div>
-
-            <div className="profile-form-group">
-              <label className="profile-label">อีเมล</label>
-              <input
-                className="profile-input"
-                type="email"
-                value={profile.email || ""}
-                onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                disabled={!isEditing}
-              />
-            </div>
-
-            <div className="profile-form-group">
-              <label className="profile-label">วันเกิด</label>
-              <div className="profile-date-container">
-                <input
-                  className="profile-input"
-                  type="date"
-                  value={profile.birthDate || ""}
-                  onChange={(e) => setProfile({ ...profile, birthDate: e.target.value })}
-                  disabled={!isEditing}
-                />
-                <span className="profile-age-text">
-                  อายุ: {profile.birthDate ? calculateAge(profile.birthDate) : "-"} ปี
-                </span>
-              </div>
-            </div>
-
-            <div className="profile-form-group">
-              <label className="profile-label">ระดับฝีเท้า</label>
-              <div className="profile-select-wrapper">
-                <select
-                  className="profile-select"
-                  disabled={!isEditing}
-                  value={profile.skillLevel || ""}
-                  onChange={(e) => setProfile({ ...profile, skillLevel: e.target.value })}
-                >
-                  <option value="Beginner">มือใหม่</option>
-                  <option value="Intermediate">ปานกลาง</option>
-                  <option value="Advanced">ขั้นสูง</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="profile-form-group">
-              <label className="profile-label">ตำแหน่งที่ถนัด</label>
-              <div className="profile-select-wrapper">
-                <select
-                  className="profile-select"
-                  disabled={!isEditing}
-                  value={profile.position || ""}
-                  onChange={(e) => setProfile({ ...profile, position: e.target.value })}
-                >
-                  <option value="ผู้รักษาประตู">ผู้รักษาประตู</option>
-                  <option value="กองหลัง">กองหลัง</option>
-                  <option value="กองกลาง">กองกลาง</option>
-                  <option value="กองหน้า">กองหน้า</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          {isEditing && (
-            <div className="profile-actions">
-              <button className="profile-cancel-button" onClick={() => setIsEditing(false)}>
-                ยกเลิก
-              </button>
-              <button className="profile-save-button" onClick={handleSave}>
-                บันทึก
-              </button>
-            </div>
-          )}
-        </div>
+        )}
       </div>
     </div>
   );

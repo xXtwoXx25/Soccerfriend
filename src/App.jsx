@@ -1,7 +1,7 @@
 // src/App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -10,10 +10,12 @@ import TeamCreationPage from "./pages/TeamCreationPage";
 import PositionSelectionPage from "./pages/PositionSelectionPage";
 import TeamSettings from "./pages/TeamSettings";
 import MatchSchedulePage from "./pages/MatchSchedulePage";
-
-import Footer from "./components/Footer";
+import ToastContainer from "./components/Profile/ToastContainer";
+import { setShowToastFunction } from "./components/hooks/useToast";
+import UserDashboard from "./pages/UserDashboard";
+import MatchSearchPage from "./pages/MatchSearchPage";
+import Footer from "./components/Footer/Footer";
 import { isLoggedIn } from "./utils/auth";
-import "./styles/Layout.css";
 
 // AppWrapper component to use useLocation hook
 const AppWrapper = () => {
@@ -30,9 +32,9 @@ const AppWrapper = () => {
   };
 
   return (
-    <div className="app-wrapper">
+    <div className="flex flex-col min-h-screen">
       {!shouldHideHeader && <Header />}
-      <main className="main-content">
+      <main className="flex-1">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -42,9 +44,16 @@ const AppWrapper = () => {
           <Route path="/team-creation" element={requireAuth(<TeamCreationPage />)} />
           <Route path="/position-selection" element={requireAuth(<PositionSelectionPage />)} />
           <Route path="/match-schedulePage" element={requireAuth(<MatchSchedulePage />)} />
+          <Route path="/user-dashboard" element={requireAuth(<UserDashboard />)} />
+          <Route path="/search-matches" element={requireAuth(<MatchSearchPage />)} />
         </Routes>
       </main>
       {!shouldHideHeader && <Footer />}
+      <ToastContainer ref={(container) => {
+        if (container) {
+          setShowToastFunction(container.showToast);
+        }
+      }} />
     </div>
   );
 };
