@@ -18,24 +18,7 @@ const RegisterForm = ({ onRegister, error }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // แยกชื่อก่อนส่ง
-    const names = form.fullName.trim().split(' ');
-    const firstName = names[0] || '';
-    const lastName = names.slice(1).join(' ') || '';
-
-    const payload = {
-      firstName,
-      lastName,
-      email: form.email,
-      phone: form.phone,
-      password: form.password,
-      confirmPassword: form.confirmPassword,
-      position: form.position,
-      location: form.location,
-    };
-
-    onRegister(payload);
+    onRegister(form);
   };
 
   return (

@@ -30,11 +30,16 @@ const ProfileHeader = ({ profile, isEditing, setProfile }) => {
     <div className="flex flex-col items-center gap-4 p-6 border-b border-gray-200">
       <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
         {profile.avatarUrl ? (
-          <img
-            src={profile.avatarUrl}
-            alt={profile.name}
-            className="w-full h-full object-cover"
-          />
+<img
+  src={
+    profile.avatarUrl?.startsWith("http")
+      ? profile.avatarUrl
+      : `http://localhost:8080${profile.avatarUrl.startsWith("/") ? "" : "/"}${profile.avatarUrl}`
+  }
+  alt="avatar"
+  className="w-full h-full object-cover"
+/>
+
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gray-200">
             <User className="w-16 h-16 text-gray-400" />
@@ -42,7 +47,7 @@ const ProfileHeader = ({ profile, isEditing, setProfile }) => {
         )}
       </div>
       {isEditing && (
-        <label className="px-3 py-1.5 text-sm border border-gray-300 rounded-md bg-white cursor-pointer transition-colors hover:bg-gray-50">
+        <label className="px-3 py-1.5 text-sm border border-emerald-700 text-emerald-700 rounded-md bg-white cursor-pointer transition-colors hover:bg-gray-50">
           เปลี่ยนรูปโปรไฟล์
           <input type="file" accept="image/*" className="hidden" onChange={handleAvatarUpload} />
         </label>

@@ -8,7 +8,7 @@ const TeamFormGroup = ({ label, id, required = false, isTextarea = false }) => {
         <textarea
           id={id}
           name={id}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm transition-colors focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 resize-vertical min-h-[120px]"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm transition-colors focus:outline-none focus:border-emerald-700 focus:ring-2 focus:ring-blue-100 resize-vertical min-h-[120px]"
           rows={3}
           placeholder={`ใส่${label.toLowerCase()}`}
         />
@@ -16,7 +16,7 @@ const TeamFormGroup = ({ label, id, required = false, isTextarea = false }) => {
         <input
           id={id}
           name={id}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm transition-colors focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm transition-colors focus:outline-none focus:border-emerald-700 focus:ring-2 focus:ring-blue-100"
           placeholder={`ใส่${label.toLowerCase()}`}
           required={required}
         />

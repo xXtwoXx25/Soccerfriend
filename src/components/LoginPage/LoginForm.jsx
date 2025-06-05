@@ -80,9 +80,6 @@ const LoginForm = () => {
           />
           <span className="text-gray-600">จดจำฉัน</span>
         </label>
-        <Link to="#" className="text-blue-600 hover:text-blue-800">
-          ลืมรหัสผ่าน?
-        </Link>
       </div>
 
       {error && <p className="text-red-500 text-sm text-center">{error}</p>}

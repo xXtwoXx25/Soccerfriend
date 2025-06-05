@@ -43,12 +43,12 @@ const RegisterPage = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.message || "Registration failed");
+        setError(data.error || "Registration failed");
         return;
       }
 
+      // ✅ สมัครสำเร็จ → ล็อกอินอัตโนมัติ
       await autoLogin(form.email, form.password);
-
     } catch (err) {
       console.error(err);
       setError("Something went wrong");
@@ -71,8 +71,7 @@ const RegisterPage = () => {
       }
 
       localStorage.setItem("token", data.token);
-      navigate("/profile");
-
+      navigate("/");
     } catch (err) {
       console.error(err);
       setError("Auto login error");

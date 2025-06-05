@@ -12,8 +12,9 @@ import TeamSettings from "./pages/TeamSettings";
 import MatchSchedulePage from "./pages/MatchSchedulePage";
 import ToastContainer from "./components/Profile/ToastContainer";
 import { setShowToastFunction } from "./components/hooks/useToast";
-import UserDashboard from "./pages/UserDashboard";
-import MatchSearchPage from "./pages/MatchSearchPage";
+import TeamDetailsPage from "./pages/TeamDetailsPage";
+import MatchListPage from './pages/MatchListPage';
+import MatchSettingsPage from './pages/MatchSettingsPage';
 import Footer from "./components/Footer/Footer";
 import { isLoggedIn } from "./utils/auth";
 
@@ -44,8 +45,9 @@ const AppWrapper = () => {
           <Route path="/team-creation" element={requireAuth(<TeamCreationPage />)} />
           <Route path="/position-selection" element={requireAuth(<PositionSelectionPage />)} />
           <Route path="/match-schedulePage" element={requireAuth(<MatchSchedulePage />)} />
-          <Route path="/user-dashboard" element={requireAuth(<UserDashboard />)} />
-          <Route path="/search-matches" element={requireAuth(<MatchSearchPage />)} />
+          <Route path="/match/:id" element={<TeamDetailsPage />} />
+          <Route path="match-list" element={<MatchListPage />} />
+           <Route path="/match/:id/settings" element={<MatchSettingsPage />} />
         </Routes>
       </main>
       {!shouldHideHeader && <Footer />}

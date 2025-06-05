@@ -73,13 +73,7 @@ const Header = () => {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-6">
               <Navigation />
-            </div>
-
-            {/* Search Bar */}
-            <div className="hidden md:block">
-              <SearchBar />
-            </div>
-
+            </div> 
             {/* User Actions */}
             <div className="flex items-center gap-4">
               {/* Notification */}

@@ -13,7 +13,7 @@ const CTASection = ({ token }) => {
         </p>
         <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
           <Link
-            to="/position-selection"
+            to="/match-list"
             className="inline-block px-6 py-3 text-base font-medium text-white bg-green-600 rounded-lg transition-all duration-200 hover:bg-green-700 hover:shadow-lg hover:-translate-y-0.5"
           >
             เริ่มค้นหาแมตช์

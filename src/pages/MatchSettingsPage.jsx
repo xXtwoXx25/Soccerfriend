@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   Calendar, Clock, MapPin, Users, Trophy, User, Shield,
 } from 'lucide-react';
 
-const TeamDetailsPage = () => {
+const MatchSettingsPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [match, setMatch] = useState(null);
   const [positionUsers, setPositionUsers] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [selectedPosition, setSelectedPosition] = useState("");
-  const [joinMessage, setJoinMessage] = useState("");
 
   useEffect(() => {
     fetchMatch();
@@ -38,35 +38,72 @@ const TeamDetailsPage = () => {
     }
   };
 
-  const handleJoin = async () => {
-    if (!selectedPosition) return;
+  const handleInvite = async () => {
+    const email = prompt("ใส่อีเมลเพื่อนที่คุณต้องการเชิญ:");
+    if (!email) return;
+
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:8080/api/match/${id}/join-position`, {
+      const res = await fetch(`http://localhost:8080/api/match/${id}/invite`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ position: selectedPosition }),
+        body: JSON.stringify({ email }),
       });
       const data = await res.json();
+      alert(res.ok ? "✅ เชิญสำเร็จ" : `❌ เชิญไม่สำเร็จ: ${data.error}`);
+    } catch {
+      alert("เกิดข้อผิดพลาดในการเชิญเพื่อน");
+    }
+  };
+
+  const handleKick = async (position) => {
+    if (!window.confirm(`คุณต้องการเตะผู้เล่นจากตำแหน่ง "${position}" หรือไม่?`)) return;
+
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:8080/api/match/${id}/kick`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ position }),
+      });
+      const data = await res.json();
+      alert(res.ok ? "✅ เตะสำเร็จ" : `❌ เตะไม่สำเร็จ: ${data.error}`);
+      if (res.ok) fetchMatch();
+    } catch {
+      alert("เกิดข้อผิดพลาดในการเตะผู้เล่น");
+    }
+  };
+
+  const handleDeleteMatch = async () => {
+    if (!window.confirm("คุณแน่ใจหรือไม่ว่าต้องการลบแมตช์นี้?")) return;
+
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:8080/api/match/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
       if (res.ok) {
-        setJoinMessage("✅ เข้าร่วมทีมสำเร็จ");
-        fetchMatch();
+        alert("✅ ลบแมตช์สำเร็จ");
+        navigate("/");
       } else {
-        setJoinMessage("❌ " + (data.error || "ไม่สามารถเข้าร่วมได้"));
+        const data = await res.json();
+        alert(`❌ ลบไม่สำเร็จ: ${data.error}`);
       }
-    } catch (err) {
-      setJoinMessage("⚠️ เกิดข้อผิดพลาด");
+    } catch {
+      alert("เกิดข้อผิดพลาดในการลบแมตช์");
     }
   };
 
   const getFilledPositions = () =>
     Object.values(match?.positions || {}).filter(v => v !== "").length;
-
-  const getAvailablePositions = () =>
-    Object.entries(match?.positions || {}).filter(([_, userId]) => !userId);
 
   if (loading) return <div className="min-h-screen bg-emerald-50 flex items-center justify-center"><p className="text-emerald-700 text-lg font-semibold">⏳ กำลังโหลดข้อมูล...</p></div>;
   if (error) return <div className="min-h-screen bg-emerald-50 flex items-center justify-center"><p className="text-red-600 text-lg font-semibold">❌ {error}</p></div>;
@@ -96,6 +133,20 @@ const TeamDetailsPage = () => {
                 </span>
               </div>
               <p className="text-white/90 leading-relaxed text-lg mb-6 max-w-3xl">{match.description}</p>
+              <div className="flex gap-3">
+                <button 
+                  onClick={handleInvite} 
+                  className="bg-white text-emerald-700 font-semibold px-6 py-3 rounded-xl hover:bg-emerald-50 transition-all duration-200 shadow-lg hover:shadow-xl"
+                >
+                  📧 เชิญเพื่อน
+                </button>
+                <button 
+                  onClick={handleDeleteMatch} 
+                  className="bg-red-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-red-500 transition-all duration-200 shadow-lg hover:shadow-xl border border-red-500"
+                >
+                  🗑️ ลบแมตช์
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -104,28 +155,14 @@ const TeamDetailsPage = () => {
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-6 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Players Section */}
           <div className="lg:col-span-3 space-y-8">
-            {/* Match Details */}
-            <div className="bg-white rounded-2xl shadow-xl border border-emerald-100 p-8">
-              <h2 className="text-2xl font-bold text-emerald-700 mb-6 flex items-center gap-3">
-                <Trophy className="w-7 h-7" />
-                รายละเอียดการแข่งขัน
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <InfoItem icon={<Calendar />} label="วัน" value={match.day} />
-                <InfoItem icon={<Clock />} label="เวลา" value={match.timeRange} />
-                <InfoItem icon={<MapPin />} label="สถานที่" value={match.location} />
-                <InfoItem icon={<Trophy />} label="ระดับความเก่ง" value={match.skillLevel} />
-              </div>
-            </div>
-
-            {/* Players Section */}
             <div className="bg-white rounded-2xl shadow-xl border border-emerald-100 p-8">
               <h2 className="text-2xl font-bold text-emerald-700 mb-6 flex items-center gap-3">
                 <Users className="w-7 h-7" />
                 ตำแหน่งผู้เล่น
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {Object.entries(match.positions).map(([position, userId]) => {
                   const profile = positionUsers[position];
                   const hasAvatar = profile?.avatarUrl;
@@ -165,49 +202,27 @@ const TeamDetailsPage = () => {
                             {userId && <p className="text-sm text-emerald-700 font-medium">{position}</p>}
                           </div>
                         </div>
-                        <span className={`text-xs px-3 py-1.5 rounded-full font-semibold ${
-                          userId 
-                            ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' 
-                            : 'bg-gray-100 text-gray-600 border border-gray-200'
-                        }`}>
-                          {userId ? '✓ เข้าร่วมแล้ว' : 'ตำแหน่งว่าง'}
-                        </span>
+                        <div className="flex flex-col items-end gap-2">
+                          <span className={`text-xs px-3 py-1.5 rounded-full font-semibold ${
+                            userId 
+                              ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' 
+                              : 'bg-gray-100 text-gray-600 border border-gray-200'
+                          }`}>
+                            {userId ? '✓ เข้าร่วมแล้ว' : 'ตำแหน่งว่าง'}
+                          </span>
+                          {userId && (
+                            <button 
+                              onClick={() => handleKick(position)} 
+                              className="text-xs text-red-600 hover:text-red-700 hover:underline font-medium transition-colors duration-200"
+                            >
+                              เตะออก
+                            </button>
+                          )}
+                        </div>
                       </div>
                     </div>
                   );
                 })}
-              </div>
-
-              {/* Join Section */}
-              <div className="bg-emerald-50 rounded-2xl p-6 border border-emerald-200">
-                <h3 className="text-lg font-bold text-emerald-700 mb-4">เข้าร่วมทีม</h3>
-                <label className="block text-sm font-medium text-emerald-700 mb-2">เลือกตำแหน่งที่ต้องการเข้าร่วม</label>
-                <select
-                  value={selectedPosition}
-                  onChange={(e) => setSelectedPosition(e.target.value)}
-                  className="w-full px-4 py-3 border-2 border-emerald-200 rounded-xl text-sm bg-white focus:border-emerald-400 focus:outline-none transition-colors duration-200"
-                >
-                  <option value="">-- กรุณาเลือกตำแหน่ง --</option>
-                  {getAvailablePositions().map(([pos]) => (
-                    <option key={pos} value={pos}>{pos}</option>
-                  ))}
-                </select>
-                <button
-                  className="mt-4 w-full px-6 py-3 bg-emerald-700 text-white font-semibold rounded-xl hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-xl"
-                  onClick={handleJoin}
-                  disabled={!selectedPosition}
-                >
-                  🏃‍♂️ เข้าร่วมทีม
-                </button>
-                {joinMessage && (
-                  <div className={`mt-4 p-3 rounded-xl text-sm font-medium ${
-                    joinMessage.includes('✅') 
-                      ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' 
-                      : 'bg-red-100 text-red-800 border border-red-200'
-                  }`}>
-                    {joinMessage}
-                  </div>
-                )}
               </div>
             </div>
           </div>
@@ -219,18 +234,6 @@ const TeamDetailsPage = () => {
     </div>
   );
 };
-
-const InfoItem = ({ icon, label, value }) => (
-  <div className="flex items-center gap-4 p-4 bg-emerald-50 rounded-xl border border-emerald-100">
-    <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-700 shadow-sm">
-      {React.cloneElement(icon, { className: "w-6 h-6" })}
-    </div>
-    <div>
-      <p className="text-sm text-emerald-600 font-medium mb-1">{label}</p>
-      <p className="font-semibold text-gray-900 text-lg">{value}</p>
-    </div>
-  </div>
-);
 
 const SidebarStats = ({ match, getFilledPositions }) => {
   const total = match.requiredPlayers || getFilledPositions();
@@ -271,4 +274,4 @@ const StatRow = ({ label, value, color = "text-gray-900" }) => (
   </div>
 );
 
-export default TeamDetailsPage;
+export default MatchSettingsPage;

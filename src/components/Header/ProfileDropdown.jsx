@@ -6,11 +6,11 @@ const ProfileDropdown = ({ userData, onLogout, onClose }) => {
   return (
     <div className="w-70 bg-white border border-gray-200 rounded-xl shadow-lg z-50 mt-2 overflow-hidden animate-in slide-in-from-top-2 duration-200">
       <div className="flex items-center gap-3 p-4 bg-gray-50 border-b border-gray-200">
-        <img 
-          src={userData.avatar || "/default-avatar.png"} 
-          alt={userData.name} 
-          className="w-12 h-12 rounded-full object-cover border-2 border-gray-200" 
-        />
+<img 
+  src={`http://localhost:8080${userData.avatarUrl || "/default-avatar.png"}`} 
+  alt={userData.name || "Avatar"} 
+  className="w-12 h-12 rounded-full object-cover border-2 border-gray-200" 
+/>
         <div className="flex-1 min-w-0">
           <h4 className="text-base font-semibold text-gray-900 m-0 truncate">
             {userData.name}

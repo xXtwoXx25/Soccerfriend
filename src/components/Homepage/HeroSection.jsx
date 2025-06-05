@@ -26,12 +26,16 @@ const HeroSection = ({ userEmail, token }) => {
               และจัดการทีมของคุณ
             </p>
             <div className="flex gap-4">
-              <Link
-                to="/position-selection"
-                className="inline-block px-6 py-3 text-base font-medium text-green-800 bg-white rounded-lg transition-all duration-200 hover:bg-green-50 hover:shadow-lg hover:-translate-y-0.5"
-              >
-                เริ่มค้นหาแมตช์
-              </Link>
+        <Link
+      to={token ? "/match-list" : "/login"}
+      onClick={(e) => {
+        if (!token) {
+        }
+      }}
+      className="inline-block px-6 py-3 text-base font-medium text-green-800 bg-white rounded-lg transition-all duration-200 hover:bg-green-50 hover:shadow-lg hover:-translate-y-0.5"
+    >
+      เริ่มค้นหาแมตช์
+    </Link>
               {!token && (
                 <Link
                   to="/register"

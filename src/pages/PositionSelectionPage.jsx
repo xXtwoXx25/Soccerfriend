@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SoccerField from "../components/PositionSelectionPage/SoccerField";
 import SelectedPositionInfo from "../components/PositionSelectionPage/SelectedPositionInfo";
 import TeamsList from "../components/PositionSelectionPage/TeamsList";
@@ -21,38 +21,37 @@ const PositionSelectionPage = () => {
     CF: { name: "กองหน้า", available: true, label: "CF", value: 6000, top: "75%", left: "50%" },
   };
 
-  const mockTeams = {
-    GK: [
-      {
-        id: 1,
-        teamName: "Thunder FC",
-        teamDetail: "เล่นทุกเย็นเสาร์ รับทุกตำแหน่ง",
-        playDate: "เสาร์",
-        playTime: "17:00 - 19:00",
-        skillLevel: "beginner",
-        homeStadium: "สนาม A",
-        logoUrl: "/uploads/logo_123.png",
-      },
-    ],
-  };
-
-  const handlePositionSelect = (position) => {
+  const handlePositionSelect = async (position) => {
     if (positions[position].available) {
       setSelectedPosition(position);
       setSearchingTeams(true);
       setAvailableTeams([]);
 
-      setTimeout(() => {
-        const teams = mockTeams[position] || [];
-        setAvailableTeams(teams);
+      try {
+        const token = localStorage.getItem("token");
+        const res = await fetch(`http://localhost:8080/api/match/find-teams?position=${position}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          setAvailableTeams(data.matches || []);
+        } else {
+          console.error("ไม่พบทีมที่เหมาะสม:", data.error);
+        }
+      } catch (err) {
+        console.error("เกิดข้อผิดพลาดในการดึงข้อมูลทีม:", err);
+      } finally {
         setSearchingTeams(false);
-      }, 1500);
+      }
     }
   };
 
   const handleJoinTeam = (team) => {
     alert(
-      `เข้าร่วมทีม ${team.teamName} สำเร็จ!\nตำแหน่ง: ${positions[selectedPosition].name}\nค่าตัว: ${positions[selectedPosition].value.toLocaleString()} บาท`
+      `เข้าร่วมทีม ${team.title} สำเร็จ!\nตำแหน่ง: ${positions[selectedPosition].name}\nค่าตัว: ${positions[selectedPosition].value.toLocaleString()} บาท`
     );
   };
 
